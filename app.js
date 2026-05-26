@@ -1,32 +1,24 @@
 require("dotenv").config();
 const axios = require("axios");
 
-async function createAccount(name){
+async function getToken() {
 
-try{
+try {
 
 const response = await axios.post(
-"https://business-api.tiktok.com/open_api/v1.3/bc/advertiser/create/",
+"https://business-api.tiktok.com/open_api/v1.3/oauth2/access_token/",
 {
-bc_id: process.env.BC_ID,
-company: name,
-currency: "PKR",
-timezone: "Asia/Karachi"
-},
-{
-headers:{
-"Access-Token":process.env.TIKTOK_TOKEN,
-"Content-Type":"application/json"
-}
+app_id: process.env.TIKTOK_APP_ID,
+secret: process.env.TIKTOK_SECRET,
+auth_code: process.env.TIKTOK_AUTH_CODE
 }
 );
 
-console.log(name,response.data);
+console.log(response.data);
 
-}catch(error){
+} catch(error){
 
 console.log(
-name,
 error.response?.data || error.message
 );
 
@@ -34,11 +26,4 @@ error.response?.data || error.message
 
 }
 
-async function run(){
-
-await createAccount("sufi agency 09");
-await createAccount("sufi agency 10");
-
-}
-
-run();
+getToken();

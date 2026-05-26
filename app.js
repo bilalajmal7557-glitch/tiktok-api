@@ -1,27 +1,29 @@
 require("dotenv").config();
 const axios = require("axios");
 
-async function getAdvertisers() {
- try {
+async function getToken() {
 
- const response = await axios.get(
- "https://business-api.tiktok.com/open_api/v1.3/oauth2/advertiser/get/",
- {
- headers:{
- "Access-Token":process.env.TIKTOK_TOKEN
- }
- }
- );
+try {
 
- console.log(response.data);
+const response = await axios.post(
+"https://business-api.tiktok.com/open_api/v1.3/oauth2/access_token/",
+{
+app_id: process.env.TIKTOK_APP_ID,
+secret: process.env.TIKTOK_SECRET,
+auth_code: process.env.TIKTOK_AUTH_CODE
+}
+);
 
- } catch(error){
+console.log(response.data);
 
- console.log(
- error.response?.data || error.message
- );
+} catch(error){
 
- }
+console.log(
+error.response?.data || error.message
+);
+
 }
 
-getAdvertisers();
+}
+
+getToken();

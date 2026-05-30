@@ -1,4 +1,3 @@
-```javascript
 require("dotenv").config();
 const express = require("express");
 const axios = require("axios");
@@ -15,20 +14,12 @@ app.get("/", async (req, res) => {
       });
     }
 
-    console.log("APP ID:", process.env.TIKTOK_APP_ID);
-    console.log("SECRET EXISTS:", !!process.env.TIKTOK_SECRET);
-
     const response = await axios.post(
       "https://business-api.tiktok.com/open_api/v1.3/oauth2/access_token/",
       {
         app_id: process.env.TIKTOK_APP_ID,
         secret: process.env.TIKTOK_SECRET,
         auth_code: authCode
-      },
-      {
-        headers: {
-          "Content-Type": "application/json"
-        }
       }
     );
 
@@ -48,6 +39,5 @@ app.get("/", async (req, res) => {
 const PORT = process.env.PORT || 3000;
 
 app.listen(PORT, () => {
-  console.log(`Server running on port ${PORT}`);
+  console.log("Server running on port " + PORT);
 });
-```

@@ -34,14 +34,3 @@ app.get("/create-advertiser", async (req, res) => {
     res.status(500).json(
       error.response?.data || { error: error.message }
     );
-    {
-  bc_id: process.env.BC_ID,
-  advertiser_info: {
-    company: "Test Marketing Agency",
-    country: "PK",
-    currency: "USD",
-    timezone: "Asia/Karachi"
-  }
-}
-  }
-});
